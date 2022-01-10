@@ -1,0 +1,196 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "1.0.0"
+  title: "A Swagger API "
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "127.0.0.1:3000"
+tags:
+- name: "people"
+  description: "Everything about people"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+- "https"
+
+paths:
+  /people/data1:
+    get:
+      tags:
+      - "people"
+      summary: "get people data1"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "empno"
+        in: "query"
+        description: "工号"
+        required: true
+        type: "string"
+        default: "12122233"
+      - name: "date"
+        in: "query"
+        description: "日期"
+        required: true
+        type: "string"
+        default: "20220104"
+      responses:
+        "200":
+          description: "success"
+        "500":
+          description: "Internal server error"
+    post:
+      tags:
+      - "people"
+      summary: "add some people infomation"
+      description: ""
+      operationId: "addPeople"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "name"
+          - "photoUrls"
+          properties:
+            id:
+              type: "integer"
+              format: "int64"
+            category:
+              type: "object"
+              properties:
+                age:
+                  type: "integer"
+                  format: "int64"
+                sex:
+                  type: "string"
+                  enum:
+                  - "male"
+                  - "female"
+            name:
+              type: "string"
+              example: "jainjun.qiao"
+            photoUrls:
+              type: "array"
+              xml:
+                name: "photoUrl"
+                wrapped: true
+              items:
+                type: "string"
+            tags:
+              type: "array"
+              xml:
+                name: "tag"
+                wrapped: true
+              items:
+                type: "object"
+                properties:
+                  id:
+                    type: "integer"
+                    format: "int64"
+                  name:
+                    type: "string"
+            status:
+              type: "string"
+              description: "pet status in the store"
+              enum:
+              - "available"
+              - "pending"
+              - "sold"
+      responses:
+        "200":
+          description: "update success"
+        "400":
+          description: "input invalid"
+        "500":
+          description: "internal server error"
+    put:
+      tags:
+      - "people"
+      summary: "Update an existing people"
+      description: ""
+      operationId: "updatePeople"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "data to be update"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "name"
+          - "photoUrls"
+          properties:
+            id:
+              type: "integer"
+              format: "int64"
+            category:
+              type: "object"
+              properties:
+                age:
+                  type: "integer"
+                  format: "int64"
+                sex:
+                  type: "string"
+                  enum:
+                  - "male"
+                  - "female"
+            name:
+              type: "string"
+              example: "jainjun.qiao"
+            photoUrls:
+              type: "array"
+              xml:
+                name: "photoUrl"
+                wrapped: true
+              items:
+                type: "string"
+            tags:
+              type: "array"
+              xml:
+                name: "tag"
+                wrapped: true
+              items:
+                type: "object"
+                properties:
+                  id:
+                    type: "integer"
+                    format: "int64"
+                  name:
+                    type: "string"
+            status:
+              type: "string"
+              description: "pet status in the store"
+              enum:
+              - "available"
+              - "pending"
+              - "sold"
+      responses:
+        "200":
+          description: "update success!"
+        "404":
+          description: "people not found"
+        "500":
+          description: "internal server error"
+   
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
